@@ -19,7 +19,7 @@ This solution provides all relevant API calls:
 - Get all users: `GET http://localhost:8000/users/all `
 - Get user details by ID: `GET http://localhost:8000/users/id/<id>`
 - Add new user: `POST http://localhost:8000/users/<id>/enrollRaffle`
-> Sample body
+> Sample request body
 ```
 {
   "name" : "Manan Gupta" (required)
@@ -36,7 +36,7 @@ This solution provides all relevant API calls:
 - Get all events: `GET http://localhost:8000/events/all `
 - Get event details by ID: `GET http://localhost:8000/events/id/<id>`
 - Add a new event: `POST http://localhost:8000/events/add`
-> Sample body
+> Sample request body
 ```
 {
   "date" : "2020-10-02" (required)
