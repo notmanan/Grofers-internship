@@ -54,8 +54,6 @@ async function nextEvent(){
 
 /**
 * GET API call to recieve all events saved in database
-* Data is sent as a .json response if found successfully
-* Error is sent as a .send response if not found, showing an appropriate error.
 * Example Call: GET http://localhost:8000/events/all
 */
 router.get('/all', async(req, res) => {
@@ -70,8 +68,6 @@ router.get('/all', async(req, res) => {
 
 /**
 * GET API call to return single event by 1D
-* Data is sent as a .json response if found successfully
-* Error is sent as a .send response if not found, showing an appropriate error.
 * Example Call: GET http://localhost:8000/events/id/<id>
 */
 router.get('/id/:id', async(req, res) =>{
@@ -86,8 +82,6 @@ router.get('/id/:id', async(req, res) =>{
 
 /**
 * POST API call to create a new event
-* Data is sent as a .json response if found successfully
-* Error is sent as a .send response if not found, showing an appropriate error.
 * Example Call: POST http://localhost:8000/events/add
 {
   "date" : "2020-10-02" (required)
@@ -113,8 +107,6 @@ router.post('/add', async(req,res) => {
 
 /**
 * GET API call to return next upcoming event
-* Data is sent as a .json response if found successfully
-* Error is sent as a .send response if not found, showing an appropriate error.
 * Example Call: GET http://localhost:8000/events/nextEvent
 */
 router.get('/nextEvent', async(req, res) => {
@@ -133,8 +125,6 @@ router.get('/nextEvent', async(req, res) => {
 
 /**
 * PATCH API call to choose a winner for the upcoming event
-* Data is sent as a .json response if found successfully
-* Error is sent as a .send response if not found, showing an appropriate error.
 * Example Call: PATCH http://localhost:8000/events/nextEvent
 */
 router.patch('/declareEvent', async(req, res) => {
@@ -161,8 +151,6 @@ router.patch('/declareEvent', async(req, res) => {
 
 /**
 * GET API call to return all winners in the last week
-* Data is sent as a .json response if found successfully
-* Error is sent as a .send response if not found, showing an appropriate error.
 * Example Call: GET http://localhost:8000/events/week
 */
 router.get('/winners', async(req, res) =>{

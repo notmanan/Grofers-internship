@@ -45,8 +45,6 @@ async function nextEvent(){
 
 /**
 * GET API call to recieve all users saved in database
-* Data is sent as a .json response if found successfully
-* Error is sent as a .send response if not found, showing an appropriate error.
 * Example Call: GET http://localhost:8000/users/all
 */
 router.get('/all', async(req, res) => {
@@ -61,8 +59,6 @@ router.get('/all', async(req, res) => {
 
 /**
 * GET API call to recieve user data from database by <id>
-* Data is sent as a .json response if found successfully
-* Error is sent as a .send response if not found, showing an appropriate error.
 * Example Call: GET http://localhost:8000/users/id/<id>
 */
 router.get('/id/:id', async(req, res) =>{
@@ -77,8 +73,6 @@ router.get('/id/:id', async(req, res) =>{
 
 /**
 * PATCH API to increase the number of raffle coupons a user has by 1
-* Data is sent as a .json response if found successfully
-* Error is sent as a .send response if not found, showing an appropriate error.
 * Example Call: PATCH http://localhost:8000/users/<id>/newRaffle
 */
 router.patch('/:id/newRaffle', async(req, res) =>{
@@ -95,8 +89,6 @@ router.patch('/:id/newRaffle', async(req, res) =>{
 
 /**
 * PATCH API to allow a user to sign up for the upcoming raffle draw event
-* Data is sent as a .json response if found successfully
-* Error is sent as a .send response if not found, showing an appropriate error.
 * Example Call: PATCH http://localhost:8000/users/<id>/enrollRaffle
 */
 router.patch('/:id/enrollRaffle', async(req, res) =>{
@@ -125,8 +117,6 @@ router.patch('/:id/enrollRaffle', async(req, res) =>{
 
 /**
 * POST API to create a new user
-* Data is sent as a .json response if found successfully
-* Error is sent as a .send response if not found, showing an appropriate error.
 * Example Call: POST http://localhost:8000/users/<id>/enrollRaffle
 {
   "name" : "Manan Gupta" (required)
