@@ -22,8 +22,8 @@ Refer to API Diagram as a quick reference guide to all the use cases. All API ca
 > Sample request body
 ```
 {
-  "name" : "Manan Gupta" (required)
-  "email" : "manan17372@iiitd.ac.in" (required)
+  "name" : "Manan Gupta"
+  "email" : "manan17372@iiitd.ac.in" 
 }
 ```
 - Increase User's coupon count by 1: `PUT http://localhost:8000/users/<id>/newRaffle`
@@ -39,8 +39,8 @@ Refer to API Diagram as a quick reference guide to all the use cases. All API ca
 > Sample request body
 ```
 {
-  "date" : "2020-10-02" (required)
-  "reward" : "iPhone 12" (defaulted to "2000 Rupees")
+  "date" : "2020-10-02" 
+  "reward" : "iPhone 12" 
 }
 ```
 - Get winners from last week: ` PUT http://localhost:8000/events/<id>/winners`
