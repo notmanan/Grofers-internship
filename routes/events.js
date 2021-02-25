@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Event = require('../models/event')
+const User = require('../models/user')
 
 router.get('/', async(req, res) => {
   try{
@@ -16,6 +17,15 @@ function convertDate(str){
   var date = new Date(parts[0],parts[1],parts[2])
   return date
 }
+
+function diff_weeks(dt2, dt1)
+ {
+
+  var diff =(dt2.getTime() - dt1.getTime()) / 1000;
+  diff /= (60 * 60 * 24 * 7);
+  return Math.abs((diff));
+
+ }
 
 async function nextEvent(){
   const events = await Event.find()
@@ -49,21 +59,33 @@ router.get('/nextEvent', async(req, res) => {
   }
 })
 
-router.get('/:id', async(req, res) =>{
-  try{
-    const event = await Event.findById(req.params.id)
-    res.json(event)
-  }catch(err){
-    res.send("GET event by id error:  " + err)
-  }
-})
+// router.get('/:id', async(req, res) =>{
+//   try{
+//     const event = await Event.findById(req.params.id)
+//     res.json(event)
+//   }catch(err){
+//     res.send("GET event by id error:  " + err)
+//   }
+// })
 
 router.get('/winners', async(req, res) =>{
   try{
-    const event = await Event.findById(req.params.id)
-    res.json(event)
+    var events = await Event.find()
+    var winners = []
+    for( i = 0 ; i < events.length ; i++){
+      var event = events[i]
+      // console.log(diff_weeks(convertDate(event.date), new Date(Date.now())))
+      if(event.winner != null && diff_weeks(convertDate(event.date), new Date(Date.now()))<=1){
+        var winnerName = (await User.findById(event.winner)).name
+        winners.push({"Name":winnerName, "Date": event.date, "Reward": event.reward})
+      }
+    }
+    res.json(winners)
+
   }catch(err){
-    res.send("GET event by id error:  " + err)
+    console.log("xyxa")
+    res.send("GET xxxx from last week:  " + err)
+    console.log("xyx")
   }
 })
 

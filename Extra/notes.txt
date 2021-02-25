@@ -46,7 +46,7 @@ Reward on say 10th Feb is Phone, 11th Feb is Washing Machine etc
 has participated with a raffle ticket, she shouldn’t be able to participate
 again in the same event.
 
-  PATCH: http://localhost:8000/users/enrollRaffle/<id>
+  PATCH: http://localhost:8000/users/<id>/enrollRaffle/
   -> Assumption: A user is only allowed to participate in the next upcoming event
   -> User chooses to participate in an event
     - Find next event
