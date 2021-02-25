@@ -12,7 +12,7 @@ const eventSchema = new mongoose.Schema({
   },
   enrolledUsers: {
     type: [String],
-    required: true
+    required: false
   },
   winner: {
     type: String,
