@@ -19,13 +19,13 @@ This solution provides all relevant API calls:
 - Get all users [GET http://localhost:8000/users/all ]
 - Get user details by ID [GET http://localhost:8000/users/id/<id>]
 - Add new user [POST http://localhost:8000/users/<id>/enrollRaffle]
-'''
+```
 {
   "name" : "Manan Gupta" (required)
   "email" : "manan17372@iiitd.ac.in" (required)
   "password" : "testPassword" (required)
 }
-'''
+```
 - Increase User's coupon count by 1 [PATCH http://localhost:8000/users/<id>/newRaffle]
 - Enroll user into a raffle draw event [PATCH http://localhost:8000/users/<id>/enrollRaffle]
 
@@ -35,12 +35,12 @@ This solution provides all relevant API calls:
 - Get all events [GET http://localhost:8000/events/all ]
 - Get event details by ID [GET http://localhost:8000/events/id/<id>]
 - Add a new event [POST http://localhost:8000/events/add]
-'''
+```
 {
   "date" : "2020-10-02" (required)
   "reward" : "iPhone 12" (defaulted to "2000 Rupees")
 }
-'''
+```
 - Get next event [GET http://localhost:8000/events/nextEvent]
 - Choose a winner for next event [PATCH http://localhost:8000/events/nextEvent]
 - Get winners from last week [ GET http://localhost:8000/events/week]
