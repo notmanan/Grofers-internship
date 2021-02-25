@@ -24,18 +24,17 @@ Refer to API Diagram as a quick reference guide to all the use cases. All API ca
 {
   "name" : "Manan Gupta" (required)
   "email" : "manan17372@iiitd.ac.in" (required)
-  "password" : "testPassword" (required)
 }
 ```
-- Increase User's coupon count by 1: `PATCH http://localhost:8000/users/<id>/newRaffle`
-- Enroll user into a raffle draw event: `PATCH http://localhost:8000/users/<id>/enrollRaffle`
+- Increase User's coupon count by 1: `PUT http://localhost:8000/users/<id>/newRaffle`
+- Enroll user into a raffle draw event: `PUT http://localhost:8000/users/<id>/enrollRaffle`
 
 
 
 ### Events:
 - Get all events: `GET http://localhost:8000/events/ `
 - Get event details by ID: `GET http://localhost:8000/events/<id>`
-- Get next upcoming event: `GET http://localhost:8000/events?nextEvent=True`
+- Get next upcoming event: `GET http://localhost:8000/events?nextEvent=T`
 - Add a new event: `POST http://localhost:8000/events/`
 > Sample request body
 ```
@@ -44,5 +43,4 @@ Refer to API Diagram as a quick reference guide to all the use cases. All API ca
   "reward" : "iPhone 12" (defaulted to "2000 Rupees")
 }
 ```
-- Choose a winner for next event: `PATCH http://localhost:8000/events/<id>/nextEvent`
-- Get winners from last week: ` GET http://localhost:8000/events/<id>/winners`
+- Get winners from last week: ` PUT http://localhost:8000/events/<id>/winners`
