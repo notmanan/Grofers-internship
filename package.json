@@ -1,0 +1,27 @@
+{
+  "name": "grofers-internship",
+  "version": "1.0.0",
+  "description": "Grofers Internship Test Project 1",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/notmanan/Grofers-internship.git"
+  },
+  "author": "manan17372@iiitd.ac.in",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/notmanan/Grofers-internship/issues"
+  },
+  "homepage": "https://github.com/notmanan/Grofers-internship#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.6.4",
+    "mongoose": "^5.11.18"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

@@ -1,0 +1,79 @@
+Models:
+  Users:
+     - Name
+     - Password
+     - Email
+     - Number Of Raffles Pending
+     - Rewards Won
+
+  RaffleEvents:
+    - Date
+    - Reward
+    - Users Enrolled
+    - Winner
+
+
+Functional Requirements
+
+
+
+- Design an API which allows users to get the raffle tickets. This API can be
+consumed in a lot of ways like We can call this API after the user has placed
+an Order.
+
+-> Some form of a post/patch request that adds +1 to the number of raffles available to a user.
+-> Can be a patch request where the user id is given as input. If authentication is available, the id will not need to be passed in the patch request.
+
+
+
+
+
+
+
+
+- Design an API which shows the next Lucky Draw Event timing & the
+corresponding reward. For example - Lucky Draw can run everyday at 8AM.
+Reward on say 10th Feb is Phone, 11th Feb is Washing Machine etc
+
+-> Figure out date-time format
+-> List all lucky draw events, find the "next" event, print.
+
+
+
+
+
+
+
+- Design an API which allows users to participate in the game. Once a user
+has participated with a raffle ticket, she shouldn’t be able to participate
+again in the same event.
+
+-> Assumption: A user is only allowed to participate in the next upcoming event
+-> User chooses to participate in an event
+  - Find next event
+  - Check if user has raffle tickets available
+  - Check user doesn't already exist in event
+  - if both conditions satisified:
+    - reduce #oftickets from user by 1
+    - add userid to raffleevent
+    - save updated data.
+    - print?
+
+
+
+
+- Design an API which lists all the winners of all the events in the last one
+week.
+
+-> Obtain all RaffleEvents
+-> Print events which are over, print Date, Reward, User [Name]
+
+
+
+
+- Compute the winner for the event and announce the winner.
+-> Patch request(?)
+-> Find next event
+-> Randomly pick a user from available Users
+-> Assign winner to winner in event data
+-> Assign reward to user in user data
