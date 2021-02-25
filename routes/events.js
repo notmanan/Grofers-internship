@@ -11,6 +11,43 @@ router.get('/', async(req, res) => {
   }
 })
 
+function convertDate(str){
+  var parts = str.split("-")
+  var date = new Date(parts[0],parts[1],parts[2])
+  return date
+}
+
+function nextEvent(events){
+  var nextE = null
+  var minDate = null
+  for(i = 0 , len = events.length; i < len; i++){
+    var event = events[i]
+    if(event.winner == null){
+      if(nextE == null){
+        minDate = convertDate(event.date)
+        nextE = event
+      }else{
+        tryDate = convertDate(event.date)
+        if(tryDate < minDate){
+          minDate = tryDate
+          nextE = event
+        }
+      }
+    }
+  }
+  return nextE
+}
+
+router.get('/next', async(req, res) => {
+  try{
+      const events = await Event.find()
+      var ne = nextEvent(events)
+      res.json(ne)
+  }catch(err){
+    res.send("GET all events error:  " + err)
+  }
+})
+
 router.get('/:id', async(req, res) =>{
   try{
     const event = await Event.findById(req.params.id)

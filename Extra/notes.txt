@@ -36,6 +36,7 @@ Reward on say 10th Feb is Phone, 11th Feb is Washing Machine etc
   GET: http://localhost:8000/events/nextEvent/
   -> Figure out date-time format
   -> List all lucky draw events, find the "next" event, print.
+  []: Scope for improvement - how to input date for testing through Postman?
 
 
 
