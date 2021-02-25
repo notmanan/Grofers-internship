@@ -8,7 +8,7 @@
 2. Clone this repository.
 3. Run `npm install` from repository.
 
-## Run
+## Run Server
 ```
 nodemon run start
 ```
