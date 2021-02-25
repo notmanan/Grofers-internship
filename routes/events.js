@@ -59,6 +59,32 @@ router.get('/nextEvent', async(req, res) => {
   }
 })
 
+router.patch('/declareEvent', async(req, res) => {
+  try{
+      // const events = await Event.find()
+      var ne = await nextEvent()
+      if(ne){
+        var participants = ne.enrolledUsers
+        if((participants).length > 0){
+          const winner = participants[Math.floor(Math.random() * participants.length)]
+          ne.winner = winner
+          await ne.save()
+
+
+
+
+          res.json(await User.findById(winner))
+        }else{
+          res.send("No Users in Event. ")
+        }
+      }else{
+        res.send("No event to declare. ")
+      }
+  }catch(err){
+    res.send("GET all events error:  " + err)
+  }
+})
+
 // router.get('/:id', async(req, res) =>{
 //   try{
 //     const event = await Event.findById(req.params.id)
