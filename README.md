@@ -6,7 +6,7 @@
 ## Installation
 1. Install Express and MongoDB.
 2. Clone this repository.
-3. Run 'npm install' from repository.
+3. Run `npm install` from repository.
 
 ## Begin
 ```
