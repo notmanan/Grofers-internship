@@ -1,7 +1,9 @@
 # Grofers-internship
- Designing and Implementing a service which allows users to get Lucky Draw Raffle tickerts and use one lucky draw raffle ticket to participate in a lucky draw game.
+ Designing and Implementing a service which allows users to get Lucky Draw Raffle tickets and use each lucky draw raffle ticket to participate in a different lucky draw game.
 
- Developed using MongoDB used for database management and Express for backend JS.
+## Developement Stack:
+- MongoDB used for database management
+- Express for backend JS
 
 ## Installation
 1. Install NodeJS and MongoDB.
