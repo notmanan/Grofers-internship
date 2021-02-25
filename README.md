@@ -16,8 +16,8 @@ nodemon run start
 ## Usage
 Refer to API Diagram as a quick reference guide to all the use cases. All API calls developed:
 ### Users:
-- Get all users: `GET http://localhost:8000/users/all `
-- Get user details by ID: `GET http://localhost:8000/users/id/<id>`
+- Get all users: `GET http://localhost:8000/users/ `
+- Get user details by ID: `GET http://localhost:8000/users/<id>`
 - Add new user: `POST http://localhost:8000/users/<id>/enrollRaffle`
 > Sample request body
 ```
@@ -33,9 +33,10 @@ Refer to API Diagram as a quick reference guide to all the use cases. All API ca
 
 
 ### Events:
-- Get all events: `GET http://localhost:8000/events/all `
-- Get event details by ID: `GET http://localhost:8000/events/id/<id>`
-- Add a new event: `POST http://localhost:8000/events/add`
+- Get all events: `GET http://localhost:8000/events/ `
+- Get event details by ID: `GET http://localhost:8000/events/<id>`
+- Get next upcoming event: `GET http://localhost:8000/events?nextEvent=True`
+- Add a new event: `POST http://localhost:8000/events/`
 > Sample request body
 ```
 {
@@ -43,7 +44,5 @@ Refer to API Diagram as a quick reference guide to all the use cases. All API ca
   "reward" : "iPhone 12" (defaulted to "2000 Rupees")
 }
 ```
-
-- Get next event: `GET http://localhost:8000/events/nextEvent`
-- Choose a winner for next event: `PATCH http://localhost:8000/events/nextEvent`
-- Get winners from last week: ` GET http://localhost:8000/events/week`
+- Choose a winner for next event: `PATCH http://localhost:8000/events/<id>/nextEvent`
+- Get winners from last week: ` GET http://localhost:8000/events/<id>/winners`

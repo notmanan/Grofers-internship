@@ -2,13 +2,12 @@ const mongoose = require('mongoose')
 
 const eventSchema = new mongoose.Schema({
    date: {
-     type: String,
+     type: Date,
      required: true
    },
    reward: {
      type: String,
-     required: true,
-     default: "2000 Rupees Cashback"
+     required: true
    },
    enrolledUsers: {
      type: [String],

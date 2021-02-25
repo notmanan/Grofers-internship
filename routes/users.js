@@ -2,19 +2,7 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
 const Event = require('../models/event')
-
-
-/**
-* Convert a "YYYY-MM-DD" String into a Date datatype
-@param {String} str (The string in "YYYY-MM-DD" format)
-@return {Date} date (the date as a Date datatype)
-*/
-function convertDate(str){
-  var parts = str.split("-")
-  var date = new Date(parts[0],parts[1],parts[2])
-  return date
-}
-
+const utils = require('../common/utils')
 
 /**
 * Returns the next upcoming raffle draw event
@@ -26,13 +14,15 @@ async function nextEvent(){
   var minDate = null
   for(i = 0 , len = events.length; i < len; i++){
     var event = events[i]
-    if(event.winner == null){ // Check to make sure that the event has not already ended
+    // Check to make sure that the event has not already ended
+    if(event.winner == null){
       if(nextE == null){
-        minDate = convertDate(event.date)
+        minDate = event.date
         nextE = event
       }else{
-        tryDate = convertDate(event.date)
-        if(tryDate < minDate){ // To find the minimum date: locates the first upcoming event
+        tryDate = event.date
+        // To find the minimum date: locates the first upcoming event
+        if(tryDate < minDate){
           minDate = tryDate
           nextE = event
         }
@@ -45,97 +35,91 @@ async function nextEvent(){
 
 /**
 * GET API call to recieve all users saved in database
-* Example Call: GET http://localhost:8000/users/all
 */
-router.get('/all', async(req, res) => {
+router.get('/', async(req, res) => {
   console.log("GET all users.")
   try{
       const users = await User.find()
       res.json(users)
   }catch(err){
-    res.send("GET all users error:  " + err)
+    utils.errorHandler(err, req, res)
   }
 })
 
 /**
 * GET API call to recieve user data from database by <id>
-* Example Call: GET http://localhost:8000/users/id/<id>
 */
-router.get('/id/:id', async(req, res) =>{
+router.get('/:id', async(req, res) =>{
   console.log("GET user by id.")
   try{
-    const user = await User.findById(req.params.id) // Obtain user by ID
+    const user = await User.findById(req.params.id).exec()
     res.json(user)
   }catch(err){
-    res.send("GET user by id error:  " + err)
+    utils.errorHandler(err, req, res,"User not found.")
   }
 })
 
 /**
-* PATCH API to increase the number of raffle coupons a user has by 1
-* Example Call: PATCH http://localhost:8000/users/<id>/newRaffle
+* PUT API to increase the number of raffle coupons a user has by 1
 */
-router.patch('/:id/newRaffle', async(req, res) =>{
-  console.log("PATCH add new raffle.")
+router.put('/:id/newRaffle', async(req, res) =>{
+  console.log("PUT add new raffle.")
   try{
-    const user = await User.findById(req.params.id) // Obtain user by ID
-    user.numberOfRaffleCoupons +=1 // Increment count of raffle coupons by 1
-    const tempUser = await user.save() // Save data change back into database
+    // Obtain user by ID
+    const user = await User.findById(req.params.id)
+    // Increment count of raffle coupons by 1
+    user.numberOfRaffleCoupons +=1
+    // Save data change back into database
+    const tempUser = await user.save()
     res.json(tempUser)
   }catch(err){
-    res.send("PATCH add new raffle error:  " + err)
+    utils.errorHandler(err, req, res)
   }
 })
 
 /**
-* PATCH API to allow a user to sign up for the upcoming raffle draw event
-* Example Call: PATCH http://localhost:8000/users/<id>/enrollRaffle
+* Put API to allow a user to sign up for the upcoming raffle draw event
 */
-router.patch('/:id/enrollRaffle', async(req, res) =>{
-  console.log("PATCH Enroll User Raffle")
+router.put('/:id/enrollRaffle', async(req, res) =>{
+  console.log("PATCH Enroll User Raffle: ")
   try{
-    const user = await User.findById(req.params.id) // Obtain user by ID
-    const nextE = await nextEvent() // Obtain next raffle draw event
+    // Obtain user by ID
+    const user = await User.findById(req.params.id)
+    // Obtain next raffle draw event
+    const nextE = await nextEvent()
     console.log(nextE)
-    if(user.numberOfRaffleCoupons > 0){ // Check if the user has raffle coupons available to enter an event
-      if(!nextE.enrolledUsers.includes(user.id)){ // Check if user has already entered upcoming event
+    // Check if the user has raffle coupons available to enter an event
+    if(user.numberOfRaffleCoupons > 0){
+      // Check if user has already entered upcoming event
+      if(!nextE.enrolledUsers.includes(user.id)){
         user.numberOfRaffleCoupons -= 1
         nextE.enrolledUsers.push(user.id)
         const tempEvent = await nextE.save()
         const tempUser = await user.save()
         res.json(tempUser)
       }else{
-        res.send("User is already a part of the upcoming raffle draw event.")
+        utils.badRequestHandler(req, res, "User is already a part of the upcoming raffle draw event.")
       }
     }else{
-      res.send("No Raffle Coupons left to use.")
+      utils.badRequestHandler(req, res, "No Raffle Coupons left to use.")
     }
   }catch(err){
-    res.send("PATCH Enroll User Raffle error:  " + err)
+    utils.errorHandler(err, req, res)
   }
 })
 
 /**
 * POST API to create a new user
-* Example Call: POST http://localhost:8000/users/<id>/enrollRaffle
-{
-  "name" : "Manan Gupta" (required)
-  "email" : "manan17372@iiitd.ac.in" (required)
-  "password" : "testPassword"  (defaulted to "1234abcd", since testing)
-}
 */
-router.post('/add', async(req,res) => {
+router.post('/', async(req,res) => {
   console.log("POST new user.")
    const  user = new User({
      name: req.body.name,
-     password: req.body.password,
      email: req.body.email,
      numberOfRaffleCoupons: req.body.numberOfRaffleCoupons
    })
    try{
      const users = await User.find()
-     console.log(users)
-
      var saveFlag = true
      for(i = 0 ; i < users.length ; i++){
        console.log(users[i].email)
@@ -146,14 +130,16 @@ router.post('/add', async(req,res) => {
       }
      }
 
-     if(saveFlag){ // Check if new user added has a unique email address
-       const tempUser = await user.save() // Save user
+     if(saveFlag){
+       // Check if new user added has a unique email address
+       const tempUser = await user.save()
+       // Save user
        res.json(tempUser)
      }else{
-       res.send("User Email Already exists. ")
+       utils.badRequestHandler(req, res, "User Email already exists.")
      }
    }catch(err){
-     res.send('POST new user error:' + err)
+     utils.errorHandler(err, req, res, message)
    }
 })
 
