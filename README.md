@@ -4,9 +4,9 @@
  Developed using MongoDB used for database management and Express for backend JS.
 
 ## Installation
-```
-npm install
-```
+1. Install Express and MongoDB.
+2. Clone this repository.
+3. Run 'npm install' from repository.
 
 ## Begin
 ```
