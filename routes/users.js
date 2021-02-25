@@ -22,6 +22,18 @@ router.get('/:id', async(req, res) =>{
   }
 })
 
+router.patch('/:id/newRaffle', async(req, res) =>{
+  console.log("GET user by id.")
+  try{
+    const user = await User.findById(req.params.id)
+    user.numberOfRaffleCoupons +=1
+    const tempUser = await user.save()
+    res.json(tempUser)
+  }catch(err){
+    res.send("GET user by id error:  " + err)
+  }
+})
+
 router.post('/', async(req,res) => {
   console.log("POST new user.")
    const  user = new User({
