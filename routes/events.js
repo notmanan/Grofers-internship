@@ -17,7 +17,8 @@ function convertDate(str){
   return date
 }
 
-function nextEvent(events){
+async function nextEvent(){
+  const events = await Event.find()
   var nextE = null
   var minDate = null
   for(i = 0 , len = events.length; i < len; i++){
@@ -38,10 +39,10 @@ function nextEvent(events){
   return nextE
 }
 
-router.get('/next', async(req, res) => {
+router.get('/nextEvent', async(req, res) => {
   try{
-      const events = await Event.find()
-      var ne = nextEvent(events)
+      // const events = await Event.find()
+      var ne = await nextEvent()
       res.json(ne)
   }catch(err){
     res.send("GET all events error:  " + err)
@@ -49,6 +50,15 @@ router.get('/next', async(req, res) => {
 })
 
 router.get('/:id', async(req, res) =>{
+  try{
+    const event = await Event.findById(req.params.id)
+    res.json(event)
+  }catch(err){
+    res.send("GET event by id error:  " + err)
+  }
+})
+
+router.get('/winners', async(req, res) =>{
   try{
     const event = await Event.findById(req.params.id)
     res.json(event)
