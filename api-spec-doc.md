@@ -1,5 +1,5 @@
-|Request Type| Endpoints     | What it does  | Parameter | Parameter Type |
-| ------------- |:------------:|------------:|------------:|  ------------:|
+|Request Type| Endpoints     | Description | Parameter | Parameter Type |
+|:--| :------------- |:------------|:-------|  :------------|
 |GET|/users/all                 | Get all users                             |||
 |GET| /users/id/{id}            | Get user details by ID                    |id|String|        
 |POST| /users/add                | Add new user                             |||
