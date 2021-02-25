@@ -14,7 +14,7 @@ nodemon run start
 ```
 
 ## Usage
-Refer to the [API Diagram] and [API specification] as a quick reference guide to all the use cases. All API calls developed:
+Refer to the [API Diagram](https://github.com/notmanan/Grofers-internship/blob/master/API%20Diagram.png) and [API specification](https://github.com/notmanan/Grofers-internship/blob/master/API%20Specification.pdf) as a quick reference guide to all the use cases. All API calls developed:
 ### Users:
 - Get all users: `GET http://localhost:8000/users/ `
 - Get user details by ID: `GET http://localhost:8000/users/<id>`
