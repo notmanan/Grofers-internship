@@ -36,7 +36,7 @@ Refer to the [API Diagram](https://github.com/notmanan/Grofers-internship/blob/m
 ### Events:
 - Get all events: `GET http://localhost:8000/events/ `
 - Get event details by ID: `GET http://localhost:8000/events/<id>`
-- Get next upcoming event: `GET http://localhost:8000/events?nextEvent=T`
+- Get next upcoming event: `GET http://localhost:8000/events?nextEvent=True`
 - Add a new event: `POST http://localhost:8000/events/`
 > Sample request body
 ```
