@@ -25,7 +25,7 @@ Refer to the [API Diagram](https://github.com/notmanan/Grofers-internship/blob/m
 ```
 {
   "name" : "Manan Gupta"
-  "email" : "manan17372@iiitd.ac.in" 
+  "email" : "email@gmail.com"
 }
 ```
 - Increase User's coupon count by 1: `PUT http://localhost:8000/users/<id>/newRaffle`
@@ -41,8 +41,8 @@ Refer to the [API Diagram](https://github.com/notmanan/Grofers-internship/blob/m
 > Sample request body
 ```
 {
-  "date" : "2020-10-02" 
-  "reward" : "iPhone 12" 
+  "date" : "2020-10-02"
+  "reward" : "iPhone 12"
 }
 ```
 - Get winners from last week: ` PUT http://localhost:8000/events/<id>/winners`
