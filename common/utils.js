@@ -5,6 +5,7 @@ function badRequestHandler(req, res, message){
 
 function errorHandler (err, req, res, message) {
   res.status(500)
+  console.log("Error.")
   res.json({ error: err, message:message })
 }
 

@@ -39,7 +39,9 @@ async function nextEvent(){
 router.get('/', async(req, res) => {
   if(req.query.nextEvent == "True"){
     try{
-        // Obtain the next upcoming event
+      /**
+      * GET API call to return next upcoming event.
+      */
         var ne = await nextEvent()
         if(ne){
           res.json(ne)
@@ -49,7 +51,28 @@ router.get('/', async(req, res) => {
     }catch(err){
       utils.errorHandler(err, req, res)
     }
-  }else{
+  }else if(req.query.winners == "True"){
+    /**
+    * GET API call to return all winners in the last week
+    */
+
+    try{
+      var events = await Event.find()
+      var winners = []
+      for( i = 0 ; i < events.length ; i++){
+        var event = events[i]
+        // console.log(diff_weeks(convertDate(event.date), new Date(Date.now())))
+        if(event.winner != null && utils.diff_weeks(event.date, new Date(Date.now()))<=1){
+          var winnerName = (await User.findById(event.winner)).name
+          winners.push({"Name":winnerName, "Date": event.date, "Reward": event.reward})
+        }
+      }
+      res.json(winners)
+    }catch(err){
+      utils.errorHandler(err, req, res)
+    }
+  }
+  else{
     console.log("GET view all raffle draw events. ")
     try{
       const events = await Event.find()
@@ -129,26 +152,6 @@ router.put('/:id/declareWinner', async(req, res) => {
   }
 })
 
-/**
-* GET API call to return all winners in the last week
-*/
-router.get('/winners', async(req, res) =>{
-  console.log("GET printing winners this week. ")
-  try{
-    var events = await Event.find()
-    var winners = []
-    for( i = 0 ; i < events.length ; i++){
-      var event = events[i]
-      // console.log(diff_weeks(convertDate(event.date), new Date(Date.now())))
-      if(event.winner != null && utils.diff_weeks(event.date, new Date(Date.now()))<=1){
-        var winnerName = (await User.findById(event.winner)).name
-        winners.push({"Name":winnerName, "Date": event.date, "Reward": event.reward})
-      }
-    }
-    res.json(winners)
-  }catch(err){
-    utils.errorHandler(err, req, res)
-  }
-})
+
 
 module.exports = router

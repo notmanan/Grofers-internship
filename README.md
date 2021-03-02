@@ -20,8 +20,8 @@ Refer to the [API Diagram](https://github.com/notmanan/Grofers-internship/blob/m
 ### Users:
 - Get all users: `GET http://localhost:8000/users/ `
 - Get user details by ID: `GET http://localhost:8000/users/<id>`
-- Add new user: `POST http://localhost:8000/users/<id>/enrollRaffle`
-> Sample request body
+- Add new user: `POST http://localhost:8000/users/``
+Sample request body:
 ```
 {
   "name" : "Manan Gupta"
@@ -38,11 +38,13 @@ Refer to the [API Diagram](https://github.com/notmanan/Grofers-internship/blob/m
 - Get event details by ID: `GET http://localhost:8000/events/<id>`
 - Get next upcoming event: `GET http://localhost:8000/events?nextEvent=True`
 - Add a new event: `POST http://localhost:8000/events/`
-> Sample request body
+Sample request body:
 ```
 {
   "date" : "2020-10-02"
   "reward" : "iPhone 12"
 }
 ```
-- Get winners from last week: ` PUT http://localhost:8000/events/<id>/winners`
+
+- Declare a winner for an event: ` PUT http://localhost:8000/events/<id>/declareWinner`
+- Get winners from last week: ` GET http://localhost:8000/events?winners=True`
